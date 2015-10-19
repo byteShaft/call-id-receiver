@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CallIDReceiver.iml" filepath="$PROJECT_DIR$/CallIDReceiver.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/call-id-receiver.iml" filepath="$PROJECT_DIR$/call-id-receiver.iml" />
     </modules>
   </component>
 </project>

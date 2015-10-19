@@ -12,6 +12,9 @@ import android.telephony.SmsMessage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class Helpers {
 
@@ -78,5 +81,11 @@ public class Helpers {
         catch(IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getTimeStamp(long time) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        simpleDateFormat.setTimeZone(TimeZone.getDefault());
+        return simpleDateFormat.format(new Date(time));
     }
 }
