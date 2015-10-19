@@ -18,6 +18,7 @@ public class BinarySmsReceiver extends BroadcastReceiver {
         String name = Helpers.getContactName(context, number);
         String dateTime = DateFormat.getInstance().format(Long.valueOf(content[1]));
         String data = String.format("Contact ID: %s\nCall time: %s", name, dateTime);
-        Helpers.writeMessageContentToFile(number, data);
+        Helpers.writeMessageContentToFile(number+ "-" +
+                Helpers.getTimeStamp(Long.valueOf(content[1])), data);
     }
 }
