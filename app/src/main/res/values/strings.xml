@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Call ID Receiver</string>
+    <string name="binary_sms_port">9851</string>
+</resources>
