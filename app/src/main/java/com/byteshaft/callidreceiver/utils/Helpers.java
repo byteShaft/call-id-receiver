@@ -59,6 +59,9 @@ public class Helpers {
             if (cursor.moveToFirst()) {
                 name = cursor.getString(
                         cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+            } else {
+                // Contact not saved.
+                name = number;
             }
             cursor.close();
         }
