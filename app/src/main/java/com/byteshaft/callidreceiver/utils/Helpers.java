@@ -83,7 +83,7 @@ public class Helpers {
         }
     }
 
-    public static String getTimeStamp(long time) {
+    public static String getTimeStamp(Long time) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         simpleDateFormat.setTimeZone(TimeZone.getDefault());
         return simpleDateFormat.format(new Date(time));
