@@ -65,22 +65,33 @@ public class Helpers {
         return name;
     }
 
-    public static void writeMessageContentToFile(String fileName, String body){
-        try {
-            File root = new File(Environment.getExternalStorageDirectory(), "CallerID");
-            if (!root.exists()) {
-                root.mkdir();
-            }
+    public static void writeMessageContentToFile(String fileName, String body, boolean append) {
+        File outputFile = getOutputFile(fileName);
+        if (append) {
+            System.out.println("Appending " + body);
+        } else {
+            System.out.println("Writing " + body);
+        }
+        writeToFile(outputFile.getPath(), body, append);
+    }
 
-            File gpxfile = new File(root, fileName);
-            FileWriter writer = new FileWriter(gpxfile);
+    private static void writeToFile(String filePath, String body, boolean append) {
+        try {
+            FileWriter writer = new FileWriter(filePath, append);
             writer.append(body);
             writer.flush();
             writer.close();
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static File getOutputFile(String fileName) {
+        File outputDirectory = new File(Environment.getExternalStorageDirectory(), "CallerID");
+        if (!outputDirectory.exists()) {
+            outputDirectory.mkdir();
+        }
+        return new File(outputDirectory, fileName);
     }
 
     public static String getTimeStamp(Long time) {
