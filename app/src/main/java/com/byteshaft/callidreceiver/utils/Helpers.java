@@ -9,14 +9,20 @@ import android.os.Environment;
 import android.provider.ContactsContract;
 import android.telephony.SmsMessage;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 public class Helpers {
+
+    private static final String FILE_HEADER = "id,name,call_start,call_end";
 
     public static String decodeIncomingSmsText(Intent intent) {
         Bundle bundle = intent.getExtras();
@@ -61,7 +67,7 @@ public class Helpers {
                         cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
             } else {
                 // Contact not saved.
-                name = number;
+                name = "N/A";
             }
             cursor.close();
         }
@@ -90,16 +96,45 @@ public class Helpers {
     }
 
     private static File getOutputFile(String fileName) {
-        File outputDirectory = new File(Environment.getExternalStorageDirectory(), "CallerID");
+        File outputDirectory = getDefaultDirectory();
         if (!outputDirectory.exists()) {
             outputDirectory.mkdir();
         }
         return new File(outputDirectory, fileName);
     }
 
+    public static File getDefaultDirectory() {
+        return new File(Environment.getExternalStorageDirectory(), "CallerID");
+    }
+
     public static String getTimeStamp(Long time) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yy hh.mm.ss.S aa");
         simpleDateFormat.setTimeZone(TimeZone.getDefault());
         return simpleDateFormat.format(new Date(time));
+    }
+
+    public static File ensureOutputFileExists() throws IOException {
+        File file = getOutputFile("logs.csv");
+        if (!file.exists()) {
+            FileWriter writer = new FileWriter(file.getPath());
+            writer.append(FILE_HEADER);
+            writer.append("\n");
+            writer.flush();
+            writer.close();
+        }
+        return file;
+    }
+
+    public static void writeToCSV(String filePathToRead) {
+        try {
+            File file = ensureOutputFileExists();
+            FileWriter writer = new FileWriter(file.getPath(), true);
+            List<String> lines = Files.readLines(new File(filePathToRead), Charsets.UTF_8);
+            writer.append(lines.get(0).trim() + "\n");
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
