@@ -21,7 +21,7 @@ public class OverlayDialog extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ovelay_dialog);
-        setTitle("Information");
+        setTitle("Save contact ?");
         cancelButton = (Button) findViewById(R.id.cancel_button);
         saveButton = (Button) findViewById(R.id.save_button);
         cancelButton.setOnClickListener(this);

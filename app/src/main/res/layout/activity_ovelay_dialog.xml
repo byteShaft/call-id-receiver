@@ -18,7 +18,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="No"
         android:id="@+id/cancel_button"
         android:layout_below="@+id/message"
         android:layout_alignParentLeft="true"
@@ -28,7 +28,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="Yes"
         android:id="@+id/save_button"
         android:layout_alignBottom="@+id/cancel_button"
         android:layout_alignParentRight="true"
